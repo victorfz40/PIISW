@@ -1,3 +1,5 @@
+<%@page import="edu.ucam.clases.Enlace"%>
+<%@page import="edu.ucam.vistas.Pagina"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="edu.ucam.beans.User, edu.ucam.beans.Login"%>
     
@@ -6,7 +8,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US"><head>
     <meta charset="utf-8">
-    <title>PÃ¡gina de Blog</title>
+    <title><% out.print(((Pagina)request.getAttribute("pagina")).getTitulo() ); %></title>
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
 
     <!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -33,15 +35,21 @@
 <h1 class="headline">
     <a href="/">QUALITY, RELIABILITY,</a>
 </h1>
-<h2 class="slogan"><% out.print(((User)request.getAttribute("user")).getUser() ); %></h2>
+<h2 class="slogan">Soluciones integrales</h2>
 
 
 
 
 
 <nav class="nav">
-    <ul class="hmenu"><li><a href="inicio.html" class="">Inicio</a></li><li><a href="contact-us.html" class="">Contact Us</a></li><li><a href="pagina-de-blog.html" class="active">Página de Blog</a></li></ul> 
-    </nav>
+    <ul class="hmenu">
+    <% 
+    for (Enlace e :((Pagina)request.getAttribute("pagina")).getMenu() )  {
+    	%><li><a href="<% out.print(e.getVinculo()); %>" class=""><% out.print(e.getTexto()); %></a></li><%
+    }
+    %>    
+    </ul> 
+</nav>
 
                     
 </header>

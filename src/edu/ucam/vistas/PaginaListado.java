@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ucam.beans.User;
+
 import edu.ucam.clases.Enlace;
 import edu.ucam.clases.Post;
 

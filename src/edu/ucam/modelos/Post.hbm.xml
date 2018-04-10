@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 04-abr-2018 17:06:38 by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="piisw_blog1" dynamic-insert="false" dynamic-update="false" mutable="true" name="edu.ucam.modelos.Post" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="post">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="edu.ucam.modelos.Administradores" embed-xml="true" fetch="select" insert="true" name="administradores" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idAdministrador" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="edu.ucam.modelos.Post" embed-xml="true" fetch="select" insert="true" name="post" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idCategoria" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="titulo" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="titulo" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="html" optimistic-lock="true" type="string" unique="false">
+            <column length="65535" name="html" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="fecha" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="fecha" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="posts" optimistic-lock="true" sort="unsorted" table="post">
+            <key on-delete="noaction">
+                <column name="idCategoria" not-null="true"/>
+            </key>
+            <one-to-many class="edu.ucam.modelos.Post" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

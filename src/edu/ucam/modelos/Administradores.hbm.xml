@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 04-abr-2018 17:06:38 by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class catalog="piisw_blog1" dynamic-insert="false" dynamic-update="false" mutable="true" name="edu.ucam.modelos.Administradores" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="administradores">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-abr-2018 17:38:57 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="edu.ucam.modelos.Administradores" table="administradores" catalog="piisw_blog1" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
-            <column name="id"/>
-            <generator class="identity"/>
+            <column name="id" />
+            <generator class="identity" />
         </id>
-        <property generated="never" lazy="false" name="usuario" optimistic-lock="true" type="string" unique="false">
-            <column length="50" name="usuario" not-null="true"/>
+        <property name="usuario" type="string">
+            <column name="usuario" length="50" not-null="true" />
         </property>
-        <property generated="never" lazy="false" name="password" optimistic-lock="true" type="string" unique="false">
-            <column length="32" name="password" not-null="true"/>
+        <property name="password" type="string">
+            <column name="password" length="32" not-null="true" />
         </property>
-        <property generated="never" lazy="false" name="email" optimistic-lock="true" type="string" unique="false">
-            <column length="100" name="email" not-null="true"/>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" />
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="posts" optimistic-lock="true" sort="unsorted" table="post">
-            <key on-delete="noaction">
-                <column name="idAdministrador" not-null="true"/>
+        <set name="posts" table="post" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idAdministrador" not-null="true" />
             </key>
-            <one-to-many class="edu.ucam.modelos.Post" embed-xml="true" not-found="exception"/>
+            <one-to-many class="edu.ucam.modelos.Post" />
         </set>
     </class>
 </hibernate-mapping>

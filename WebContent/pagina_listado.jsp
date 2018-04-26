@@ -6,7 +6,7 @@
     
     
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US"><head>
+<html dir="ltr" lang="en-US"><head><!-- Created by Artisteer v4.3.0.60745 -->
     <meta charset="utf-8">
     <title><% out.print(((PaginaListado)request.getAttribute("pagina")).getTitulo() ); %></title>
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
@@ -22,6 +22,7 @@
     <script src="script.responsive.js"></script>
 
 
+
 </head>
 <body>
 <div id="main">
@@ -33,9 +34,9 @@
             </div>
 
 <h1 class="headline">
-    <a href="/">QUALITY, RELIABILITY,</a>
+    <a href="/">CALIDAD Y RENTABILIDAD,</a>
 </h1>
-<h2 class="slogan">Soluciones integrales</h2>
+<h2 class="slogan">PROFESIONALES</h2>
 
 
 
@@ -56,18 +57,31 @@
 <div class="layout-wrapper">
                 <div class="content-layout">
                     <div class="content-layout-row">
+                        <div class="layout-cell sidebar1"><div class="block clearfix">
+        <div class="blockheader">
+            <h3 class="t">Categories</h3>
+        </div>
+        <div class="blockcontent"><div>
+		<ul>
+		<% for (Enlace e :((PaginaListado)request.getAttribute("pagina")).getMenuLateral())   { %>
+		<li><a href="<% out.print(e.getVinculo()); %>" title="<% out.print(e.getTexto()); %>"><% out.print(e.getTexto()); %></a> </li>
+		<% } %>
+		</ul>
+		</div>
+		</div>
+</div>
+</div>
                         <div class="layout-cell content">
                         
-<% for (Post p :((PaginaListado)request.getAttribute("pagina")).getContenido() )  { 
-	%>
+<% for (Post p :((PaginaListado)request.getAttribute("pagina")).getContenido() )  { %>
 <article class="post article">
-                                <h2 class="postheader"><a href="Blog Posts/publicar-2.html"><% out.print(p.getTitulo()); %></a>
+                                <h2 class="postheader"><a href="post/<% out.print(p.getId()); %>"><% out.print(p.getTitulo()); %></a>
                                 </h2>
 
                 <div class="postcontent postcontent-0 clearfix">
 <% out.print(p.getContenidoComienzo()); %>
 
-<br><a href="Blog Posts/publicar-2.html">Leer más</a>
+<br><a href="postid/<% out.print(p.getId()); %>">Leer más</a>
                 </div>
                                 <div class="postfootericons metadata-icons">
                     <span class="postcategoryicon">Category: No Category</span>
@@ -85,7 +99,7 @@
                     </div>
                 </div>
             </div><footer class="footer">
-<p><a href="#">Privacy Policy</a>|<a href="#">Terms Of Use</a>|<a href="#">Feedback</a></p><br><p>Bibendum rutrum blandit augue sed at nibh.</p>
+<p><a href="#">Política de privacidad</a>|<a href="#">Términos de uso</a>|<a href="#">Feedback</a></p><br><p>Servicios profesionales.</p>
 </footer>
 
     </div>

@@ -1,4 +1,4 @@
-
+/* Created by Artisteer v4.3.0.60745 */
 
 #main
 {
@@ -271,7 +271,7 @@ ul.vmenu a
 .blockcontent h6
 {
    margin-top: 35px;
-   margin-bottom: 35px;	
+   margin-bottom: 35px;
    font-size: 11px;
    font-family: 'Century Gothic', Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
 }
@@ -531,16 +531,16 @@ text-shadow: 0px 2px 1px rgba(23, 23, 23, 0.5);
    margin:0 auto;
    background-repeat: no-repeat;
    height: 400px;
-   background-image: url('images/object1649987792.png'),url('images/object0.png'), url('images/header.jpg5555');
-   background-position: 27px 11px,298px 0px, 0 0;
+   background-image: url('images/object0.png'), url('images/header.jpg');
+   background-position: 298px 0px, 0 0;
    position: relative;
    z-index: auto !important;
 }
 
 .custom-responsive .header
 {
-   background-image: url('images/object1649987792.png'),url('images/object0.png'), url('images/header.jpg');
-   background-position: 27px 11px,298px 0px, 0 0;
+   background-image: url('images/object0.png'), url('images/header.jpg');
+   background-position: 298px 0px, 0 0;
 }
 
 .default-responsive .header,
@@ -2552,6 +2552,12 @@ blockquote p,
 .ie8 .lightbox-wrapper .ccw 
 {
    display: none;
+}
+
+.content-layout .sidebar1
+{
+   margin:0 auto;
+   width: 200px;
 }
 
 .content-layout .content

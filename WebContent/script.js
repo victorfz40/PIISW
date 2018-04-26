@@ -1168,22 +1168,6 @@ if (typeof window.resizeData === 'undefined') window.resizeData = {};
 window.resizeData.headerPageWidth = false;
 if (typeof window.defaultResponsiveData === 'undefined') window.defaultResponsiveData = [false, true, true, true, true, ];
 
-resizeData['object1649987792'] = {
-   responsive: [
-                  { left: 0.04, top: 0.04, visible: true }, 
-                  { left: 0.04, top: 0.04, visible: true }, 
-                  { left: 0.04, top: 0.04, visible: true }, 
-                  { left: 0.04, top: 0.04, visible: true }, 
-                  { left: 0.04, top: 0.04, visible: true }, 
-               ],
-   area: {
-       x: 0,
-       y: 0
-   },
-   width: 256,
-   height: 100,
-   autoWidth: false};
-
 resizeData['object0'] = {
    responsive: [
                   { left: 1, top: 1, visible: true }, 
@@ -1479,8 +1463,8 @@ jQuery(function ($) {
     processElementMultiplyBg(".header", {
         "bgimage": "url('images/header.jpg')",
         "bgposition": "0 0",
-        "images": "url('images/object1649987792.png'),url('images/object0.png'), ",
-        "positions": "27px 11px,298px 0px, "
+        "images": "url('images/object0.png'), ",
+        "positions": "298px 0px, "
     });
 });
 if (typeof window.resizeData === 'undefined') window.resizeData = {};

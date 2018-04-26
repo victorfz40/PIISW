@@ -1,5 +1,5 @@
 package edu.ucam.modelos;
-// Generated 04-abr-2018 17:06:38 by Hibernate Tools 5.2.8.Final
+// Generated 26-abr-2018 17:38:56 by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,6 +69,12 @@ public class Administradores implements java.io.Serializable {
 
 	public void setPosts(Set posts) {
 		this.posts = posts;
+	}
+
+	@Override
+	public String toString() {
+		return "Administradores [id=" + id + ", usuario=" + usuario + ", password=" + password + ", email=" + email
+				+ ", posts=" + posts + "]";
 	}
 
 }

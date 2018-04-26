@@ -34,14 +34,14 @@ public class PaginaInicio extends HttpServlet {
 		//Ejemplo Obtener datos de la BD con Hibernate
 		session=HibernateUtils.getSessionFactory().openSession();
 		Categorias c=new Categorias();
-		c=session.byId(Categorias.class).load(8);
+		c=session.byId(Categorias.class).load(8);//Cargamos un registro y lo impimimos
 		System.out.println("Imprimimos una valor de la BD sacado con Hibernate " + c);
 		
 		
 		PaginaListado p=new PaginaListado();
 		p.setTitulo("Página de inicio Blog ");
 		
-		//<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc rutrum, enim eu elementum ornare, nulla odio vulputate magna, nec vehicula nisi tellus quis sapien. Etiam quis mattis diam, a accumsan quam. Morbi faucibus sem at cursus efficitur. Aenean quam ligula, ultricies sit amet odio non, ornare semper elit. Vestibulum porttitor feugiat magna, quis maximus mauris consequat tristique. Donec pellentesque porta egestas. Suspendisse condimentum ex quis lobortis porta.<p>
+		//
 		ArrayList<Post> contenido=new ArrayList<>();
 		Post post1=new Post();
 		post1.setContenidoComienzo("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc rutrum, enim eu elementum ornare, nulla odio vulputate magna, nec vehicula nisi tellus quis sapien. Etiam quis mattis diam, a accumsan quam. Morbi faucibus sem at cursus efficitur. Aenean quam ligula, ultricies sit amet odio non, ornare semper elit. Vestibulum porttitor feugiat magna, quis maximus mauris consequat tristique. Donec pellentesque porta egestas. Suspendisse condimentum ex quis lobortis porta.<p>");
@@ -57,11 +57,19 @@ public class PaginaInicio extends HttpServlet {
 
 		
 		ArrayList<Enlace> menu=new ArrayList<>();
-		Enlace e1=new Enlace("texto1","inicio");
-		Enlace e2=new Enlace("texto2","dos");
+		Enlace e1=new Enlace("texto1","#inicio");
+		Enlace e2=new Enlace("texto2","#dos");
 		menu.add(e1);
 		menu.add(e2);
 		p.setMenu(menu);
+		
+		ArrayList<Enlace> menuLateral=new ArrayList<>();
+		Enlace e11=new Enlace("texto1Lateral","#inicio");
+		Enlace e12=new Enlace("texto2Lateral","#dos");
+		menuLateral.add(e11);
+		menuLateral.add(e12);
+		p.setMenuLateral(menuLateral);
+		
 		
 		p.crearPagina(request, response);
 		

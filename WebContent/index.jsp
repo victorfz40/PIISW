@@ -11,12 +11,12 @@
 	<article class="post article">
 		<h2 class="postheader">
 			<a href="post?id=<%out.print(p.getId());%>">
-				<%=p.getTitulo())%>
+				<%=p.getTitulo()%>
 			</a>
 		</h2>
 
 		<div class="postcontent postcontent-0 clearfix">
-			<%=p.getHtmlCorto()) %>
+			<%=p.getHtmlCorto() %>
 			<br>
 			<a href="post?id=<%out.print(p.getId());%>">Leer más</a>
 		</div>

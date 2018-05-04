@@ -26,10 +26,8 @@ public class PostController extends MainController {
 		System.out.println("Detalle de un post");
 		String id = request.getParameter("id");
 		
-		getBlocks(request, response);		
-		request.setAttribute("title", "Inicio");		
-		try {
-			session = HibernateUtils.getSessionFactory().openSession();			
+		getBlocks(request, response);
+		try {			
 			Query<Post> qp = session.createQuery("from Post where id="+id);		
 			Post post = qp.getSingleResult();		
 			request.setAttribute("content", post);				

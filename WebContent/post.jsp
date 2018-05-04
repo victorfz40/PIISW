@@ -15,12 +15,18 @@
 		</div>
 		
 		<div class="postfootericons metadata-icons">
-			<span class="postcategoryicon">Category: No Category</span> | <span
-				class="posttagicon">Tags: <a href="#" title="link">link</a>,
-				<a href="#" title="visited link" class="visited">visited</a>, <a
-				href="#" title="hovered link" class="hover">hovered</a></span> | <span
+			<span class="postcategoryicon">Categorías: <%
+				out.print((post.getCategorias() != null
+							? "<a href='/listadoCategoria.jsp?id=" + post.getCategorias().getId() + ">"
+									+ post.getCategorias().getNombre() + "</a>"
+							: "No categorizada"));
+			%></span> | <span
 				class="postcommentsicon"><a href="#comments"
-				title="Comments">Sin comentarios»</a></span>
+				title="Comments"><%
+						out.print((post.getComentarioses() != null && post.getComentarioses().size() > 0
+									? post.getComentarioses().size() + " comentario(s)"
+									: "Sin comentarios"));
+					%></span>
 		</div>
 	</article>
 </div>

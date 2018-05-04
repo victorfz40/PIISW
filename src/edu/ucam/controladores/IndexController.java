@@ -26,8 +26,7 @@ public class IndexController extends MainController {
 		
 		getBlocks(request, response);		
 		request.setAttribute("title", prop.getProperty("empresa"));		
-		try {
-			session = HibernateUtils.getSessionFactory().openSession();			
+		try {			
 			Query<Post> qp = session.createQuery("from Post");		
 			List<Post> posts = qp.getResultList();		
 			request.setAttribute("content", posts);						

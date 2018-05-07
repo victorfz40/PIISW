@@ -24,9 +24,10 @@ public class PostController extends MainController {
 	@SuppressWarnings({ "unchecked" })
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Detalle de un post");
-		String id = request.getParameter("id");
 		
-		getBlocks(request, response);
+		String id = request.getParameter("id");
+				
+		getBlocks(request, response, false);
 		try {			
 			Query<Post> qp = session.createQuery("from Post where id="+id);		
 			Post post = qp.getSingleResult();		
@@ -38,4 +39,6 @@ public class PostController extends MainController {
 		//session.close();
 		request.getRequestDispatcher("/post.jsp").forward(request, response);
 	}
+	
+	
 }

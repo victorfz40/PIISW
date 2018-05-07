@@ -17,7 +17,7 @@
 		<div class="postfootericons metadata-icons">
 			<span class="postcategoryicon">Categorías: <%
 				out.print((post.getCategorias() != null
-							? "<a href='/listadoCategoria.jsp?id=" + post.getCategorias().getId() + ">"
+							? "<a href='/listadoCategoria?id=" + post.getCategorias().getId() + ">"
 									+ post.getCategorias().getNombre() + "</a>"
 							: "No categorizada"));
 			%></span> | <span

@@ -7,9 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.hibernate.query.Query;
+
 import edu.ucam.modelos.Categorias;
-import edu.ucam.modelos.HibernateUtils;
 import edu.ucam.modelos.Post;
 
 @WebServlet(urlPatterns = { "/listadoCategoria" })
@@ -25,9 +26,9 @@ public class CategoryController extends MainController {
 		System.out.println("Detalle de un post");
 		String id = request.getParameter("id");
 		
-		getBlocks(request, response);			
+		getBlocks(request, response, false);			
 		try {		
-			Query<Post> qp = session.createQuery("from Post where categoria="+id);
+			Query<Post> qp = session.createQuery("from Post where idCategoria="+id);
 			List<Post> posts = qp.getResultList();
 			request.setAttribute("content", posts);
 			Query<Categorias> qc = session.createQuery("from Categorias where id="+id);

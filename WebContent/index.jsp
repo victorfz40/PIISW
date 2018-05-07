@@ -3,47 +3,37 @@
 <%
 	List<Post> posts = (List<Post>)request.getAttribute("content");
 %>
-
-<div class="layout-cell content">
+	<div class="col-lg-8 mx-auto">
+	
 	<%
-		for (Post p : posts) {
+		if(posts == null) { %>
+		<h2 class="post-title">Actualmente no hay entradas.</h2>	
+	<%	} else {
+			for (Post p : posts) {
 	%>
-	<article class="post article">
-		<h2 class="postheader">
-			<a href="post?id=<%out.print(p.getId());%>">
-				<%=p.getTitulo()%>
-			</a>
-		</h2>
-
-		<div class="postcontent postcontent-0 clearfix">
-			<%=p.getHtmlCorto() %>
-			<br>
-			<a href="post?id=<%out.print(p.getId());%>">Leer más</a>
-		</div>
-		<div class="postfootericons metadata-icons">
-			<span class="postcategoryicon">Categorías: <%
-				out.print((p.getCategorias() != null
-							? "<a href='/listadoCategoria.jsp?id=" + p.getCategorias().getId() + ">"
+		<div class="post-preview">
+            <a href="post?id=<%=p.getId()%>">
+              <h2 class="post-title">
+                <%=p.getTitulo()%>
+              </h2>
+              <h3 class="post-subtitle">
+                <%=p.getHtmlCorto() %>
+              </h3>
+            </a>
+            <p class="post-meta">Categoría:<%=(p.getCategorias() != null
+							? "<a href='listadoCategoria?id=" + p.getCategorias().getId() + "'>"
 									+ p.getCategorias().getNombre() + "</a>"
-							: "No categorizada"));
-			%>
-			</span> | <span class="posttagicon">Tags: <a href="#" title="link">link</a>,
-				<a href="#" title="visited link" class="visited">visited</a>, <a
-				href="#" title="hovered link" class="hover">hovered</a></span> | <span
-				class="postcommentsicon"><a href="#comments"
-				title="Comments">
-					<%
-						out.print((p.getComentarioses() != null && p.getComentarioses().size() > 0
-									? p.getComentarioses().size() + " comentario(s)"
-									: "Sin comentarios"));
-					%>
-			</a></span>
-		</div>
-	</article>
-	<%
+							: "No categorizada") %>              
+              el <%=p.getFecha().toString() %></p>
+        </div>
+        <hr>
+       <% }
 		}
-	%>
-</div>
-
+		%>          
+          <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Antiguos &rarr;</a>
+        </div>
+      </div>
 
 <%@ include file="footer.jsp" %>

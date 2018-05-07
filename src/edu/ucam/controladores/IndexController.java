@@ -24,7 +24,7 @@ public class IndexController extends MainController {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("recibido post en pagina de inicio");
 		
-		getBlocks(request, response);		
+		getBlocks(request, response, false);		
 		request.setAttribute("title", prop.getProperty("empresa"));		
 		try {			
 			Query<Post> qp = session.createQuery("from Post");		

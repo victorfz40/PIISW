@@ -6,83 +6,77 @@
 	pageEncoding="ISO-8859-1" import=" edu.ucam.modelos.Post"%>
 	
 <%
-	ArrayList<Enlace> menu = (ArrayList<Enlace>)request.getAttribute("menu");
+	String titulo = (String) request.getAttribute("titulo");
+	String empresa = (String) request.getAttribute("empresa");
+	Enlace[] menu = (Enlace[])request.getAttribute("menu");
 	List<Categorias> cats = (List<Categorias>)request.getAttribute("categorias");
-%>
-	
+%>	
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<head>
-	<!-- Created by Artisteer v4.3.0.60745 -->
-	<meta charset="utf-8">
-	<title>
-		<%
-			out.print(request.getAttribute("titulo"));
-		%>
-	</title>
-	<meta name="viewport"
-		content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">	
-	<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<link rel="stylesheet" href="css/style.css" media="screen">
-	<!--[if lte IE 7]><link rel="stylesheet" href="css/style.ie7.css" media="screen" /><![endif]-->
-	<link rel="stylesheet" href="css/style.responsive.css" media="all">	
-	<script src="js/jquery.js"></script>
-	<script src="js/script.js"></script>
-<script src="js/script.responsive.js"></script>
-</head>
-<body>
-	<div id="main">
-		<div class="sheet clearfix">
-			<header class="header">
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title><%=titulo %></title>
 
-				<div class="shapes"></div>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="css/clean-blog.css" rel="stylesheet">
+  </head>
 
-				<h1 class="headline">
-					<a href="/">CALIDAD Y RENTABILIDAD,</a>
-				</h1>
-				<h2 class="slogan">PROFESIONALES</h2>
+  <body>
 
-				<nav class="nav">
-					<ul class="hmenu">
-						<%
-							for (Enlace e : menu) {
-						%><li><a href="<%out.print(e.getVinculo());%>" class="">
-								<%
-									out.print(e.getTexto());
-								%>
-						</a></li>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="inicio"><%=empresa %></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+          	<%
+				for (Enlace e : menu) {
+			%><li class="nav-item"><a class="nav-link" href="<%=e.getVinculo() %>"><%=e.getTexto() %></a></li>
+			<%
+				}
+			%>          
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Blog de Lorem Ipsum</h1>
+              <span class="subheading">Creado por <%=empresa %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <div class="container">
+    	<div class="row">
+    		<div class="col-lg-3">
+		    	<section class="categories">
+		        	<h3>Categorías</h3>
+		        	<nav>
+			            <ul class="nav flex-column">
+			             	<%
+			              	for (Categorias c : cats) {
+						%><li class="nav-item"><a class="nav-link" href="listadoCategoria?id=<%=c.getId() %>"><%=c.getNombre() %></a></li>
 						<%
 							}
-						%>
-					</ul>
-				</nav>
-			</header>
-			<div class="layout-wrapper">
-				<div class="content-layout">
-					<div class="content-layout-row">
-						<div class="layout-cell sidebar1">
-							<div class="block clearfix">
-								<div class="blockheader">
-									<h3 class="t">Categories</h3>
-								</div>
-								<div class="blockcontent">
-									<div>
-										<ul>
-											<%
-												for (Categorias e : cats) {
-											%>
-											<li><a
-												href="/listadoCategoria.jsp?id=<%out.print(e.getId());%>"
-												title="<%out.print(e.getNombre());%>">
-													<%
-														out.print(e.getNombre());
-													%>
-											</a></li>
-											<%
-												}
-											%>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
+						%>        
+			            </ul>
+		            </nav>
+		    	</section>
+		    </div>    

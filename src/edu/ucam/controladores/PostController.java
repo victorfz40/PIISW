@@ -40,5 +40,17 @@ public class PostController extends MainController {
 		request.getRequestDispatcher("/post.jsp").forward(request, response);
 	}
 	
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+		String name = request.getParameter("nombre");
+		String email = request.getParameter("email");
+		String comentario= request.getParameter("comentario");
+		
+		System.out.println(name +"-"+email+"-"+comentario);
+		
+		if(name != "" && comentario != "") {
+			
+		} else {
+			
+		}
+	}
 }

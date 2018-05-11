@@ -25,7 +25,7 @@ public class IndexController extends MainController {
 		System.out.println("recibido post en pagina de inicio");
 		
 		getBlocks(request, response, false);		
-		request.setAttribute("title", prop.getProperty("empresa"));		
+		request.setAttribute("titulo", prop.getProperty("empresa"));		
 		try {			
 			Query<Post> qp = session.createQuery("from Post");		
 			List<Post> posts = qp.getResultList();		

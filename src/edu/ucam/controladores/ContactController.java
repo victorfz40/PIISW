@@ -9,32 +9,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(urlPatterns = { "/login" })
-public class LoginController extends MainController {
+@WebServlet(urlPatterns = { "/contact" })
+public class ContactController extends MainController {
 	private static final long serialVersionUID = 1933599531034509234L;
 	
-    public LoginController() {
+    public ContactController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("login de usuario");
+		System.out.println("Contacto");
 		
 		getBlocks(request, response, false);		
-		request.setAttribute("titulo", prop.getProperty("Autenticación de usuarios"));		
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		request.setAttribute("titulo", prop.getProperty("Formulario de contacto"));		
+		request.getRequestDispatcher("/contact.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String user = request.getParameter("user");
-		String passwd = request.getParameter("password");
+		String name = request.getParameter("nombre");
+		String email = request.getParameter("email");
+		String comentario= request.getParameter("comentario");
 		
-		if(passwd == "hola") {
-			HttpSession sesion = request.getSession();
-			sesion.setAttribute("idUSuario", "1");
-			request.getRequestDispatcher("/admin").forward(request, response);
+		System.out.println(name +"-"+email+"-"+comentario);
+		
+		if(name != "" && comentario != "") {
+			
 		} else {
-			//Mensaje de error			
+			
 		}
 	}
 }

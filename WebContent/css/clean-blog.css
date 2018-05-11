@@ -440,3 +440,25 @@ section.categories {
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
+ .review-info {
+    font-size: 12px;
+}
+span.avatar {
+    background-color: #57c9e8;
+    border-radius: 200px;
+    color: #fff;
+    display: block;
+    font-size: 22px;
+    height: 40px;
+    line-height: 42px;
+    text-align: center !important;
+    text-transform: uppercase;
+    width: 40px;
+}
+.review-info span {
+    margin: 10px 0;
+}
+.review-detalle {
+    font-size: 12px;
+    padding-top: 8px;
+}

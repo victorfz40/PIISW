@@ -459,6 +459,17 @@ span.avatar {
     margin: 10px 0;
 }
 .review-detalle {
-    font-size: 12px;
+    font-size: 14px;
     padding-top: 8px;
+}
+
+.comentarios form {
+	margin-top: 20px;
+}
+
+.comentario {
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(200,200,200,0.5);
+    margin-top: 10px;
 }

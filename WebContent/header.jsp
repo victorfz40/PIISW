@@ -10,6 +10,12 @@
 	String empresa = (String) request.getAttribute("empresa");
 	Enlace[] menu = (Enlace[])request.getAttribute("menu");
 	List<Categorias> cats = (List<Categorias>)request.getAttribute("categorias");
+	String msg = (String) session.getAttribute("msg");
+	if(msg == null) {
+		msg = "";
+	} else {
+		session.removeAttribute("msg");
+	}
 %>	
 <!DOCTYPE html>
 <html lang="es">
@@ -64,6 +70,13 @@
     </header>
     
     <div class="container">
+    <%
+    	if(msg != "") {
+    %>
+    <div class="alert alert-primary" role="alert">
+	  <%=msg %>
+	</div>
+    <% } %>
     	<div class="row">
     		<div class="col-lg-3">
 		    	<section class="categories">

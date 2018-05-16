@@ -16,7 +16,7 @@
 			<br>
 		</div>
 		
-		<div class="row">
+		<div class="row postfooter">
 			<span class="postcategoryicon">Categorías: <%
 				out.print((post.getCategorias() != null
 							? "<a href='listadoCategoria?id=" + post.getCategorias().getId() + "'>"
@@ -29,7 +29,7 @@
 									: "Sin comentarios"));
 					%></span>
 		</div>
-		<div class="row">
+		<div class="row addcomment">
 			<a href="#form-comentario" class="btn btn-outline-primary">Añadir comentario</a>
 		</div>			
 		</article>
@@ -64,7 +64,7 @@
 					</div>
 					<div class="col-12 form-group">
 						<label for="email">Email</label>
-						<input type="text" name="email" class="form-control" />					
+						<input type="email" name="email" class="form-control" />					
 					</div>
 					<div class="col-12 form-group">
 						<label for="comentario">Comentario</label>

@@ -20,7 +20,7 @@
                 <%=p.getHtmlCorto() %>
               </h3>
             </a>
-            <p class="post-meta">Categoría:<%=(p.getCategorias() != null
+            <p class="post-meta ">Categoría:<%=(p.getCategorias() != null
 							? "<a href='listadoCategoria?id=" + p.getCategorias().getId() + "'>"
 									+ p.getCategorias().getNombre() + "</a>"
 							: "No categorizada") %>              

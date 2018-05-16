@@ -421,7 +421,6 @@ footer .copyright {
 
 section.categories {
 	font-size: 0.9em;
-	margin-top: 30px;
 }
 
 .nav.flex-column:not(.list-style-icons) > li .nav-link {
@@ -443,6 +442,17 @@ section.categories {
  .review-info {
     font-size: 12px;
 }
+
+.postfooter {
+	margin: 20px 0px;
+	font-size: 0.9em;
+	font-style: italic;
+	color: #868e96;
+}
+.addcomment {
+	margin: 20px 0px;
+}
+
 span.avatar {
     background-color: #57c9e8;
     border-radius: 200px;

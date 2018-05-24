@@ -60,7 +60,7 @@
 				<div class="row">
 					<div class="col-12 form-group">
 						<label for="email">Nombre</label>
-						<input type="text" name="nombre" class="form-control" required="required" />					
+						<input type="text" name="nombre" class="form-control" />					
 					</div>
 					<div class="col-12 form-group">
 						<label for="email">Email</label>
@@ -68,7 +68,7 @@
 					</div>
 					<div class="col-12 form-group">
 						<label for="comentario">Comentario</label>
-						<textarea name="comentario" class="form-control" required="required"></textarea>										
+						<textarea name="comentario" class="form-control"></textarea>										
 					</div>
 					<input type="hidden" name="id" value="<%=request.getParameter("id") %>" />
 					<button type="submit" class="btn btn-primary">Enviar</button>
@@ -77,4 +77,4 @@
 		</section>
 	</div>
 
-<%@ include file="footer.jsp"%>
+<%@ include file="../footer.jsp"%>

@@ -9,6 +9,14 @@
 	String titulo = (String) request.getAttribute("titulo");
 	String empresa = (String) request.getAttribute("empresa");
 	Enlace[] menu = (Enlace[])request.getAttribute("menu");
+	Enlace[] enlaces = (Enlace[])request.getAttribute("enlaces");
+	
+	String msg = (String) session.getAttribute("msg");
+	if(msg == null) {
+		msg = "";
+	} else {
+		session.removeAttribute("msg");
+	}
 %>	
 <!DOCTYPE html>
 <html lang="es">
@@ -17,12 +25,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <title><%=titulo %></title>
-
+	
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="css/clean-blog.css" rel="stylesheet">
+    <script src="../js/jquery.datatable.js"></script>
   </head>
 
   <body>
@@ -62,23 +72,27 @@
       </div>
     </header>
     
-<div class="row">
-	<div class="col-8 offset-2 col-lg-2 offset-lg-5 col-md-4 offset-sm-4 col-sm-6 offset-sm-3">
-		<h1>Login de usuario</h1>
-		<form action="login" method="post">
-			 <div class="form-group">
-			    <label for="email">Usuario</label>
-			    <input type="text" class="form-control" id="user" name="user" required="required"/>    
-			  </div>
-			  <div class="form-group">
-			    <label for="password">Contrase&ntilde;a</label>
-			    <input type="password" class="form-control" id="password" name="password" required="required"/>
-			  </div>
-			
-			  <button type="submit" class="btn btn-primary">Entrar</button>
-		  </form>
+    <div class="container">
+    <%
+    	if(msg != "") {
+    %>
+    <div class="alert alert-primary" role="alert">
+	  <%=msg %>
 	</div>
-</div>
-
-
-<%@ include file="footer.jsp" %>
+    <% } %>
+    	<div class="row">
+    		<div class="col-lg-3">
+		    	<section class="categories">
+		        	<h3>Administrar</h3>
+		        	<nav>
+			            <ul class="nav flex-column">
+		             		<%
+								for (Enlace e : enlaces) {
+							%><li class="nav-item"><a class="nav-link" href="<%=e.getVinculo() %>"><%=e.getTexto() %></a></li>
+							<%
+								}
+							%>          
+			            </ul>
+		            </nav>
+		    	</section>
+		    </div>    

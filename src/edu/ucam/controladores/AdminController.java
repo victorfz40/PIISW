@@ -2,7 +2,6 @@ package edu.ucam.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -20,13 +19,17 @@ import com.google.gson.Gson;
 import edu.ucam.clases.Enlace;
 import edu.ucam.modelos.Categorias;
 import edu.ucam.modelos.HibernateUtils;
+import edu.ucam.servicios.AdminService;
+import edu.ucam.servicios.AdminServiceImpl;
 
-public abstract class MainController  extends HttpServlet {
+public abstract class AdminController  extends HttpServlet {
 	protected static Session session;	
 	private static final long serialVersionUID = 1L;
 	protected static Properties prop;
+	protected static AdminService service;
 	
-	public MainController() {
+	
+	public AdminController() {
 		if(prop == null) {
 			prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
@@ -37,20 +40,17 @@ public abstract class MainController  extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		if(service == null) {
+			service = new AdminServiceImpl();
+		}
 	}
 
 	@SuppressWarnings({ "unchecked" })
 	protected void getBlocks(HttpServletRequest request, HttpServletResponse response, Boolean isPrivate) throws ServletException, IOException {
 		request.setAttribute("title", "Inicio");		
-		try {
-			session = HibernateUtils.getSessionFactory().openSession();
-			HttpSession sesionUsuario = request.getSession();
-			
-			Query<Categorias> qc = session.createQuery("from Categorias");		
-			List<Categorias> cats = qc.getResultList();
-			request.setAttribute("categorias", cats);
-			request.setAttribute("empresa", prop.getProperty("empresa"));
-			
+		try {			
+			HttpSession sesionUsuario = request.getSession();			
+			request.setAttribute("empresa", prop.getProperty("empresa"));			
 			String smenu = "";
 			if(isPrivate && sesionUsuario.getAttribute("idUsuario") == null) {
 				request.getRequestDispatcher("login").forward(request, response);
@@ -63,7 +63,7 @@ public abstract class MainController  extends HttpServlet {
 				smenu = prop.getProperty("menu.public");
 				Enlace[] menus = new Gson().fromJson(smenu, Enlace[].class);			
 				request.setAttribute("menu", menus);
-			}			
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());			
 		}

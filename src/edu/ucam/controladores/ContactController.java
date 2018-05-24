@@ -61,7 +61,7 @@ public class ContactController extends MainController {
 		  sesionHttp.setAttribute("msg", "Se ha enviado el mensaje correctamente. Gracias por contactar con nosotros.");
 		} catch (Exception e) {
 			System.out.println(e);
-			sesionHttp.setAttribute("msg", "Hubo un problema al comunicar su mensaje, por favor inténtelo de nuevo o mande un correo a " + prop.getProperty("contact.email"));
+			sesionHttp.setAttribute("msg", "En un principio el correo se hubiese mandado si se hubiera configurado una cuenta smtp para el envío.");
 		}
 		getBlocks(request, response, false);		
 		request.setAttribute("titulo", prop.getProperty("Formulario de contacto"));		

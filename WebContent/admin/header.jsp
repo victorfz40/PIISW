@@ -35,7 +35,7 @@
     <script src="../js/jquery.datatable.js"></script>
   </head>
 
-  <body>
+  <body class="admin">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">

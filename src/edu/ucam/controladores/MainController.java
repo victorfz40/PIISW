@@ -2,7 +2,6 @@ package edu.ucam.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -51,19 +50,19 @@ public abstract class MainController  extends HttpServlet {
 			request.setAttribute("categorias", cats);
 			request.setAttribute("empresa", prop.getProperty("empresa"));
 			
-			String smenu = "";
-			if(isPrivate && sesionUsuario.getAttribute("idUsuario") == null) {
-				request.getRequestDispatcher("login").forward(request, response);
-			}
+			String smenu = "";			 
 			if(isPrivate) {
+				if(sesionUsuario.getAttribute("user") == null) {
+					request.getRequestDispatcher("login").forward(request, response);
+				}
 				smenu = prop.getProperty("menu.private");
 				Enlace[] enlaces = new Gson().fromJson(prop.getProperty("admin.links"), Enlace[].class);
 				request.setAttribute("enlaces", enlaces);
 			} else {
-				smenu = prop.getProperty("menu.public");
-				Enlace[] menus = new Gson().fromJson(smenu, Enlace[].class);			
-				request.setAttribute("menu", menus);
+				smenu = prop.getProperty("menu.public");				
 			}			
+			Enlace[] menus = new Gson().fromJson(smenu, Enlace[].class);			
+			request.setAttribute("menu", menus);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());			
 		}

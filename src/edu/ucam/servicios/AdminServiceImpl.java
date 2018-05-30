@@ -74,6 +74,22 @@ public class AdminServiceImpl implements AdminService {
 		return new ArrayList<Entidad>();
 	}
 	
+
+	@SuppressWarnings("unchecked")
+	public <Entidad> List<Entidad> search(String entidad, String where, int limit_ini, int limit_fin) {
+		try {
+			Query query = session.createQuery("FROM "+ entidad +" WHERE " + where);
+			query.setFirstResult(limit_ini);
+			query.setMaxResults(limit_fin);
+			return query.getResultList();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+
+		return new ArrayList<Entidad>();
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public <Entidad> List<Entidad> getListado(String entidad) {
 		try {

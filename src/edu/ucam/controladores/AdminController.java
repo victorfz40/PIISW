@@ -2,7 +2,6 @@ package edu.ucam.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -12,13 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import com.google.gson.Gson;
 
 import edu.ucam.clases.Enlace;
-import edu.ucam.modelos.Categorias;
-import edu.ucam.modelos.HibernateUtils;
 import edu.ucam.servicios.AdminService;
 import edu.ucam.servicios.AdminServiceImpl;
 
@@ -52,18 +48,19 @@ public abstract class AdminController  extends HttpServlet {
 			HttpSession sesionUsuario = request.getSession();			
 			request.setAttribute("empresa", prop.getProperty("empresa"));			
 			String smenu = "";
-			if(isPrivate && sesionUsuario.getAttribute("idUsuario") == null) {
-				request.getRequestDispatcher("login").forward(request, response);
-			}
+
 			if(isPrivate) {
+				if(sesionUsuario.getAttribute("user") == null) {
+					request.getRequestDispatcher("login").forward(request, response);
+				}
 				smenu = prop.getProperty("menu.private");
 				Enlace[] enlaces = new Gson().fromJson(prop.getProperty("admin.links"), Enlace[].class);
 				request.setAttribute("enlaces", enlaces);
 			} else {
-				smenu = prop.getProperty("menu.public");
-				Enlace[] menus = new Gson().fromJson(smenu, Enlace[].class);			
-				request.setAttribute("menu", menus);
+				smenu = prop.getProperty("menu.public");				
 			}
+			Enlace[] menus = new Gson().fromJson(smenu, Enlace[].class);			
+			request.setAttribute("menu", menus);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());			
 		}

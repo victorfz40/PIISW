@@ -8,6 +8,7 @@ public interface AdminService {
 	public <Entidad> boolean update(Class<Entidad> clase, Object objeto);
 	public <Entidad> boolean delete(Class<Entidad> clase, Object id);
 	public <Entidad> List<Entidad> search(String entidad, String where);
+	public <Entidad> List<Entidad> search(String entidad, String where, int limit_ini, int limit_fin);
 	public <Entidad> List<Entidad> getListado(String entidad);
 	public <Entidad> Entidad getRegistroById(Class<Entidad> entidad, Object identificador);
 	public <Entidad> List<Entidad> getRegistroByField(String entidad, String campo, Object valor);

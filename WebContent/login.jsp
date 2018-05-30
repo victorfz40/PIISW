@@ -8,6 +8,7 @@
 <%
 	String titulo = (String) request.getAttribute("titulo");
 	String empresa = (String) request.getAttribute("empresa");
+	Integer logged = request.getAttribute("logged") != null?1:0;	
 	Enlace[] menu = (Enlace[])request.getAttribute("menu");
 %>	
 <!DOCTYPE html>
@@ -79,6 +80,15 @@
 		  </form>
 	</div>
 </div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		if(<%=logged %>){
+			location.href='admin/index';
+		}
+	});
+		
+</script>
 
 
 <%@ include file="footer.jsp" %>

@@ -40,9 +40,10 @@ public class LoginController extends MainController {
 		if(admin.size() > 0) {
 			System.out.println("Concedido...");
 			HttpSession sesion = request.getSession();
-			sesion.setAttribute("idUSuario", admin.get(0).getId());
+			sesion.setAttribute("user", admin.get(0));
 			getBlocks(request, response, true);
-			request.getRequestDispatcher("/admin/index").forward(request, response);
+			request.setAttribute("logged", "1");
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		} else {
 			getBlocks(request, response, false);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);

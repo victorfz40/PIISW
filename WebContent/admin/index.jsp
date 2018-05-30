@@ -2,8 +2,8 @@
 <%@page import="edu.ucam.modelos.Comentarios"%>
 <%@ include file="header.jsp"%>
 <%
-	String posts = (String) request.getAttribute("entradas");
-	String comentarios = (String) request.getAttribute("comentarios");
+	List<Post> posts = (List<Post>) request.getAttribute("entradas");
+	List<Comentarios> comentarios = (List<Comentarios>) request.getAttribute("comentarios");
 %>
 
 	<div class="col-lg-8 mx-auto">		

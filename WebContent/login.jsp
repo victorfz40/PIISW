@@ -69,11 +69,11 @@
 		<form action="login" method="post">
 			 <div class="form-group">
 			    <label for="email">Usuario</label>
-			    <input type="text" class="form-control" id="user" name="user" required="required"/>    
+			    <input type="text" class="form-control" id="user" name="user" value="admin" required="required"/>    
 			  </div>
 			  <div class="form-group">
 			    <label for="password">Contrase&ntilde;a</label>
-			    <input type="password" class="form-control" id="password" name="password" required="required"/>
+			    <input type="password" class="form-control" id="password" name="password" value="123456" required="required"/>
 			  </div>
 			
 			  <button type="submit" class="btn btn-primary">Entrar</button>

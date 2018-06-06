@@ -26,16 +26,16 @@ import javafx.geometry.Pos;
 import java.text.ParseException;
 
 
-@WebServlet(urlPatterns = { "/admin/post" })
-public class AdminPostController extends AdminController {
-	private static final long serialVersionUID = 963924354958882227L;
+@WebServlet(urlPatterns = { "/admin/administradores" })
+public class AdminUsuariosController extends AdminController {
+	//private static final long serialVersionUID = ;
 	
-    public AdminPostController() {
+    public AdminUsuariosController() {
         super();
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Detalle de un post");
+		System.out.println("Detalle de un Administrador");
 		if(getBlocks(request, response, true)) {
 			try {
 				if(request.getParameter("edit") != null) {
@@ -47,10 +47,10 @@ public class AdminPostController extends AdminController {
 				}else if(request.getParameter("del") != null) {//Elimina un registro
 					borrar(request,response);
 				}else {//Muestra el listado
-					List<Post> posts = new ArrayList<Post>();
-					posts = service.search("Post", "1=1", 0, 500);
-					request.setAttribute("posts", posts);
-					request.getRequestDispatcher("/admin/post.jsp").forward(request, response);
+					List<Administradores> administradores = new ArrayList<Administradores>();
+					administradores = service.search("Administradores", "1=1", 0, 500);
+					request.setAttribute("administradores", administradores);
+					request.getRequestDispatcher("/admin/administradores.jsp").forward(request, response);
 				}
 			}catch(Exception e) {
 				System.out.println("Error "+e.getMessage());
@@ -81,34 +81,21 @@ public class AdminPostController extends AdminController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void guardarEditado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {//Actualiza los datos de post
+	private void guardarEditado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 
-			Post p=service.getRegistroById(Post.class,Integer.parseInt(request.getParameter("edit")) );
-			Administradores a=(Administradores)service.getRegistroById(Administradores.class, Integer.parseInt(request.getParameter("idAdministrador")));
-			p.setAdministradores(a);
-			Categorias c=new Categorias(); 
-			c=service.getRegistroById(Categorias.class, Integer.parseInt(request.getParameter("idCategoria")));
-			p.setCategorias(c);
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date fecha=new Date();
-			try {
-				fecha = formatter.parse(request.getParameter("fecha"));
-			} catch (ParseException e) {
-				System.out.println("Error convirtiendo fechas "+e.getMessage());
-			}
-			p.setFecha(fecha);
-			p.setHtmlCorto(request.getParameter("htmlCorto"));
-			p.setHtml(request.getParameter("html"));
-			p.setTitulo(request.getParameter("titulo"));
+			Administradores administradores=service.getRegistroById(Administradores.class,Integer.parseInt(request.getParameter("edit")) );
+			administradores.setEmail(request.getParameter("email"));
+			administradores.setUsuario(request.getParameter("usuario"));
+			administradores.setPassword(request.getParameter("password"));
 			
 			try {
-				service.update(Post.class, p);
+				service.update(Administradores.class, administradores);
 			}catch (Exception e) {
 				System.out.println("Error al actualizar "+e.getMessage());
 			}
 			
-			response.sendRedirect(request.getContextPath()+"/admin/post?edit="+request.getParameter("edit"));
+			response.sendRedirect(request.getContextPath()+"/admin/administradores?edit="+request.getParameter("edit"));
 		}catch(Exception e) {
 			System.out.println("Error "+e.getMessage());
 			request.setAttribute("msg", "Error "+e.getMessage());
@@ -120,30 +107,17 @@ public class AdminPostController extends AdminController {
 	private void guardarNuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			Post p=new Post();
-			Administradores a=(Administradores)service.getRegistroById(Administradores.class, Integer.parseInt(request.getParameter("idAdministrador")));
-			p.setAdministradores(a);
-			Categorias c=new Categorias(); 
-			c=service.getRegistroById(Categorias.class, Integer.parseInt(request.getParameter("idCategoria")));
-			p.setCategorias(c);
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date fecha=new Date();
-			try {
-				fecha = formatter.parse(request.getParameter("fecha"));
-			} catch (ParseException e) {
-				System.out.println("Error convirtiendo fechas "+e.getMessage());
-			}
-			p.setFecha(fecha);
-			p.setHtmlCorto(request.getParameter("htmlCorto"));
-			p.setHtml(request.getParameter("html"));
-			p.setTitulo(request.getParameter("titulo"));
+			Administradores administradores=new Administradores();
+			administradores.setEmail(request.getParameter("email"));
+			administradores.setUsuario(request.getParameter("usuario"));
+			administradores.setPassword(request.getParameter("password"));
 			
 			try {
-				service.create(Post.class, p);
+				service.create(Administradores.class, administradores);
 			}catch (Exception e) {
 				System.out.println("Error al actualizar "+e.getMessage());
 			}
-			response.sendRedirect(request.getContextPath()+"/admin/post");
+			response.sendRedirect(request.getContextPath()+"/admin/administradores");
 		}catch(Exception e) {
 			System.out.println("Error "+e.getMessage());
 			request.setAttribute("msg", "Error "+e.getMessage());
@@ -151,32 +125,17 @@ public class AdminPostController extends AdminController {
 		}
 	}
 	
-	/*@SuppressWarnings("unchecked")
-	private void guardarNuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}*/
 	
 	@SuppressWarnings("unchecked")
 	private void formularioNuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Post post=new Post();
-			post.setTitulo("");
-			post.setHtml("");
-			post.setHtmlCorto("");
-	
-			post.setFecha(new Date());
+			Administradores administradores=new Administradores();
+			administradores.setEmail("");
+			administradores.setPassword("");
+			administradores.setUsuario("");
 			
-			System.out.println(post);
-			List<Categorias> categorias = new ArrayList<Categorias>();
-			categorias = service.search("Categorias", "1=1", 0, 500);
-			List<Administradores> administradores = new ArrayList<Administradores>();
-			administradores = service.search("Administradores", "1=1", 0, 500);
-			
-			
-			request.setAttribute("post", post);
-			request.setAttribute("categorias", categorias);
 			request.setAttribute("administradores", administradores);
-			request.getRequestDispatcher("/admin/postedit.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/administradoresedit.jsp").forward(request, response);
 		}catch(Exception e) {
 			System.out.println("Error "+e.getMessage());
 			request.setAttribute("msg", "Error "+e.getMessage());
@@ -186,16 +145,10 @@ public class AdminPostController extends AdminController {
 	@SuppressWarnings("unchecked")
 	private void formularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Post post=(Post) (service.getRegistroById(Post.class,  Integer.parseInt(request.getParameter("edit"))));
-			List<Categorias> categorias = new ArrayList<Categorias>();
-			categorias = service.search("Categorias", "1=1", 0, 500);
-			List<Administradores> administradores = new ArrayList<Administradores>();
-			administradores = service.search("Administradores", "1=1", 0, 500);
+			Administradores administradores=(Administradores) (service.getRegistroById(Administradores.class,  Integer.parseInt(request.getParameter("edit"))));
 			
-			request.setAttribute("post", post);
-			request.setAttribute("categorias", categorias);
 			request.setAttribute("administradores", administradores);
-			request.getRequestDispatcher("/admin/postedit.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/administradoresedit.jsp").forward(request, response);
 	}catch(Exception e) {
 		System.out.println("Error "+e.getMessage());
 		request.setAttribute("msg", "Error "+e.getMessage());
@@ -209,8 +162,8 @@ public class AdminPostController extends AdminController {
 		try {
 			System.out.println("Borrando el registro con id="+request.getParameter("del"));
 			try{
-				service.delete(Post.class,Integer.parseInt(request.getParameter("del")));
-				response.sendRedirect(request.getContextPath()+"/admin/post");
+				service.delete(Administradores.class,Integer.parseInt(request.getParameter("del")));
+				response.sendRedirect(request.getContextPath()+"/admin/administradores");
 			}catch(Exception e){
 				System.out.println("No se ha borrado el registro "+e.getMessage());
 			}
@@ -221,21 +174,4 @@ public class AdminPostController extends AdminController {
 		}
 	}
 	
-	/*@SuppressWarnings("unchecked")
-	private void loadPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		System.out.println("Id="+id);
-		id="2";
-		
-		try {			
-			Query<Post> qp = session.createQuery("from Post where id="+id);		
-			Post post = qp.getSingleResult();		
-			request.setAttribute("content", post);				
-			request.setAttribute("titulo", post.getTitulo() + " - " + prop.getProperty("empresa"));		
-		} catch (Exception e) {
-
-			System.out.println(e.getMessage());			
-		} 
-		request.getRequestDispatcher("/admin/post.jsp").forward(request, response);
-	}*/
 }

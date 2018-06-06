@@ -15,4 +15,5 @@ public interface AdminService {
 	public <Entidad> List<Entidad> getLineasByCabecera(String entidadLineas, String columnaJoin, Object identificador);
 	public int getTotalElementosSearch(String entidad, String where);
 	public int getTotalElementosListado(String entidad);
+	public <Entidad> String toJson(List<Entidad> listado);
 }

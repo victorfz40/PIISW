@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import com.google.gson.Gson;
 
 import edu.ucam.clases.Enlace;
+import edu.ucam.modelos.HibernateUtils;
 import edu.ucam.servicios.AdminService;
 import edu.ucam.servicios.AdminServiceImpl;
 
@@ -26,6 +27,11 @@ public abstract class AdminController  extends HttpServlet {
 	
 	
 	public AdminController() {
+		try {
+			session = HibernateUtils.getSessionFactory().openSession();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());			
+		}
 		if(prop == null) {
 			prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
@@ -41,9 +47,8 @@ public abstract class AdminController  extends HttpServlet {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	protected void getBlocks(HttpServletRequest request, HttpServletResponse response, Boolean isPrivate) throws ServletException, IOException {
-		request.setAttribute("title", "Inicio");		
+	protected boolean getBlocks(HttpServletRequest request, HttpServletResponse response, Boolean isPrivate) throws ServletException, IOException {
+		request.setAttribute("titulo", "Inicio");		
 		try {			
 			HttpSession sesionUsuario = request.getSession();			
 			request.setAttribute("empresa", prop.getProperty("empresa"));			
@@ -51,7 +56,8 @@ public abstract class AdminController  extends HttpServlet {
 
 			if(isPrivate) {
 				if(sesionUsuario.getAttribute("user") == null) {
-					request.getRequestDispatcher("login").forward(request, response);
+					response.sendRedirect(request.getContextPath() +"/login");
+					return false;
 				}
 				smenu = prop.getProperty("menu.private");
 				Enlace[] enlaces = new Gson().fromJson(prop.getProperty("admin.links"), Enlace[].class);
@@ -61,8 +67,10 @@ public abstract class AdminController  extends HttpServlet {
 			}
 			Enlace[] menus = new Gson().fromJson(smenu, Enlace[].class);			
 			request.setAttribute("menu", menus);
+			return true;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());			
+			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 	

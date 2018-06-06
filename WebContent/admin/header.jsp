@@ -2,6 +2,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="edu.ucam.modelos.Categorias"%>
 <%@page import="edu.ucam.clases.Enlace"%>
+<%@page import="java.text.SimpleDateFormat"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import=" edu.ucam.modelos.Post"%>
 	
@@ -25,13 +27,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <title><%=titulo %></title>
-	
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href="css/clean-blog.css" rel="stylesheet">
+    <link href="../css/clean-blog.css" rel="stylesheet">
     <script src="../js/jquery.datatable.js"></script>
   </head>
 
@@ -88,7 +93,7 @@
 			            <ul class="nav flex-column">
 		             		<%
 								for (Enlace e : enlaces) {
-							%><li class="nav-item"><a class="nav-link" href="<%=e.getVinculo() %>"><%=e.getTexto() %></a></li>
+							%><li class="nav-item"><a id="<%=e.getTexto() %>" class="nav-link" href="<%=e.getVinculo() %>"><%=e.getTexto() %></a></li>
 							<%
 								}
 							%>          

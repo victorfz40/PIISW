@@ -18,7 +18,7 @@ import edu.ucam.modelos.Comentarios;
 import edu.ucam.modelos.Post;
 
 
-@WebServlet(urlPatterns = { "/admin/users" })
+@WebServlet(urlPatterns = { "/admin/users22" })
 public class AdminUsersController extends AdminController {
 	private static final long serialVersionUID = 963924354958882227L;
 	
@@ -26,46 +26,49 @@ public class AdminUsersController extends AdminController {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Detalle de un post");
-		
-		String search = (String) request.getAttribute("search");
-		List<Post> posts = new ArrayList<Post>();
-		if(search == null) {
-			posts = service.getListado("Post");
-		} else {
-			posts = service.search("Post", "titulo like '%"+search+"%'");
+		if(getBlocks(request, response, true)) {
+			String search = (String) request.getAttribute("search");
+			List<Post> posts = new ArrayList<Post>();
+			if(search == null) {
+				posts = service.getListado("Post");
+			} else {
+				posts = service.search("Post", "titulo like '%"+search+"%'");
+			}
+			request.setAttribute("entradas", posts);
+			loadPage(request, response);
 		}
-		request.setAttribute("entradas", posts);
-		loadPage(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-		HttpSession sesionHttp = request.getSession();
-		String name = request.getParameter("nombre");
-		String email = request.getParameter("email");
-		String comentario= request.getParameter("comentario");
-		String id= request.getParameter("id");
-		
-		System.out.println(name +"-"+email+"-"+comentario);
-		
-		if(name != "" && comentario != "" && id != "") {
-			Transaction tx = session.beginTransaction();
-			try {
-				Post post = session.get(Post.class, new Integer(id));
-				Comentarios ocomentario = new Comentarios(post, email, name, comentario, new Date());
-				session.save(ocomentario);
-				tx.commit();
-				sesionHttp.setAttribute("msg", "Comentario guardado con éxito");
-			} catch (Exception e) {
-				System.out.println(e);			
-				if (tx!=null) tx.rollback();
-				sesionHttp.setAttribute("msg", "Hubo un problema al guardar el comentario.");	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(getBlocks(request, response, true)) {
+			HttpSession sesionHttp = request.getSession();
+			String name = request.getParameter("nombre");
+			String email = request.getParameter("email");
+			String comentario= request.getParameter("comentario");
+			String id= request.getParameter("id");
+			
+			System.out.println(name +"-"+email+"-"+comentario);
+			
+			if(name != "" && comentario != "" && id != "") {
+				Transaction tx = session.beginTransaction();
+				try {
+					Post post = session.get(Post.class, new Integer(id));
+					Comentarios ocomentario = new Comentarios(post, email, name, comentario, new Date());
+					session.save(ocomentario);
+					tx.commit();
+					sesionHttp.setAttribute("msg", "Comentario guardado con éxito");
+				} catch (Exception e) {
+					System.out.println(e);			
+					if (tx!=null) tx.rollback();
+					sesionHttp.setAttribute("msg", "Hubo un problema al guardar el comentario.");	
+				}
+			} else {
+				sesionHttp.setAttribute("msg", "Faltan campos obligatorios para poder guardar el comentario.");
 			}
-		} else {
-			sesionHttp.setAttribute("msg", "Faltan campos obligatorios para poder guardar el comentario.");
+			loadPage(request, response);
 		}
-		loadPage(request, response);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -81,5 +84,5 @@ public class AdminUsersController extends AdminController {
 			System.out.println(e.getMessage());			
 		} 
 		request.getRequestDispatcher("/admin/users.jsp").forward(request, response);
-	}
+	}*/
 }

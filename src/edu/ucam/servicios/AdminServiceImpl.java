@@ -1,8 +1,10 @@
 package edu.ucam.servicios;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -168,6 +170,27 @@ public class AdminServiceImpl implements AdminService {
 			System.out.println(e);
 		}
 		return resultado;
+	}
+	
+	public <Entidad> String toJson(List<Entidad> listado) {
+		StringBuilder json = new StringBuilder("[");
+		//System.out.println(StringEscapeUtils.escapeJava("Hell");
+		try {
+			for (Entidad entidad : listado) {		
+					json.append(entidad.getClass().getMethod("toJson",null).invoke(entidad, null) + ",");			
+			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			System.out.println(e);
+		}
+		String jsonStr = json.toString();
+		String jsonStr2 = "";
+		
+		if(jsonStr.length() > 1) {
+			jsonStr2=jsonStr.substring(0,jsonStr.length()-1);
+		}
+		System.out.println(jsonStr2);
+		return jsonStr2+"]";
 	}
 
 }

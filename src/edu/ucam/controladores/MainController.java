@@ -40,7 +40,7 @@ public abstract class MainController  extends HttpServlet {
 
 	@SuppressWarnings({ "unchecked" })
 	protected void getBlocks(HttpServletRequest request, HttpServletResponse response, Boolean isPrivate) throws ServletException, IOException {
-		request.setAttribute("title", "Inicio");		
+		request.setAttribute("titulo", "Inicio");		
 		try {
 			session = HibernateUtils.getSessionFactory().openSession();
 			HttpSession sesionUsuario = request.getSession();
@@ -53,7 +53,7 @@ public abstract class MainController  extends HttpServlet {
 			String smenu = "";			 
 			if(isPrivate) {
 				if(sesionUsuario.getAttribute("user") == null) {
-					request.getRequestDispatcher("login").forward(request, response);
+					response.sendRedirect(request.getContextPath() +"/login");
 				}
 				smenu = prop.getProperty("menu.private");
 				Enlace[] enlaces = new Gson().fromJson(prop.getProperty("admin.links"), Enlace[].class);

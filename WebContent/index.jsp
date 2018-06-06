@@ -29,11 +29,7 @@
         <hr>
        <% }
 		}
-		%>          
-          <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Antiguos &rarr;</a>
-        </div>
+		%>    
       </div>
 
 <%@ include file="footer.jsp" %>

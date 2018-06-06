@@ -36,17 +36,16 @@ public class LoginController extends MainController {
 		System.out.println("Comprobando de usuario " + user + ":" + passwd);
 		AdminService service = new AdminServiceImpl();
 		List<Administradores> admin = service.search("Administradores", "usuario like '"+user+"' and password like MD5('"+passwd+"')");
+		HttpSession sesion = request.getSession();
 		
 		if(admin.size() > 0) {
-			System.out.println("Concedido...");
-			HttpSession sesion = request.getSession();
+			System.out.println("Concedido...");			
 			sesion.setAttribute("user", admin.get(0));
 			getBlocks(request, response, true);
-			request.setAttribute("logged", "1");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() +"/admin/index");
 		} else {
-			getBlocks(request, response, false);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			sesion.setAttribute("msg", "USuario o contraña incorrecto.");
+			response.sendRedirect(request.getContextPath() +"/login");
 		}
 	}	
 }

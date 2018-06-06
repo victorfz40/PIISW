@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ucam.modelos.Administradores;
 import edu.ucam.modelos.Comentarios;
 import edu.ucam.modelos.Post;
 
@@ -24,13 +25,19 @@ public class AdminIndexController extends AdminController {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Admin index");
 		
-		List<Post> posts = new ArrayList<Post>();
-		List<Comentarios> comentarios = new ArrayList<Comentarios>();		
-		posts = service.search("Post", "1=1", 0, 5);
-		comentarios = service.search("Comentarios", "1=1",0,5);		
-		request.setAttribute("entradas", posts);
-		request.setAttribute("comentarios",comentarios);
-		getBlocks(request, response, true);
-		request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+		if(getBlocks(request, response, true)) {
+			List<Post> posts = new ArrayList<Post>();
+			List<Comentarios> comentarios = new ArrayList<Comentarios>();		
+			List<Administradores> administradores = new ArrayList<Administradores>();	
+			posts = service.search("Post", "1=1", 0, 50);
+			comentarios = service.search("Comentarios", "1=1",0,50);
+			administradores = service.search("Administradores", "1=1",0,50);
+			
+			request.setAttribute("entradas", service.toJson(posts));
+			request.setAttribute("comentarios", service.toJson(comentarios));	
+			//System.out.println("\n\n----"+(String)request.getAttribute("entradas")+"---\n\n");
+			
+			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+		}
 	}
 }

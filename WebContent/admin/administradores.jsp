@@ -1,10 +1,10 @@
 <%@page import="java.util.Set"%>
-<%@ page import="edu.ucam.modelos.Post"%>
+<%@ page import="edu.ucam.modelos.Administradores"%>
 <%@ include file="header.jsp"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%
-	List<Post> posts2 = (List<Post>)request.getAttribute("posts");	
+	List<Administradores> administradores2 = (List<Administradores>)request.getAttribute("administradores");	
 %>
 
 
@@ -21,7 +21,7 @@
 			Entradas
 		</h2>
 		
-		<a class="btn" href="post?edit=new">Nueva entrada</a>
+		<a class="btn" href="administradores?edit=new">Nueva entrada</a>
 		<section class="comentarios">				
 			<table id="comentarios" class="display" width="100%"></table>
 		</section>
@@ -35,11 +35,11 @@
 			    <th>Eliminar</th>
 			  </tr>
 	<%
-		if(posts2 == null) { %>
-		<tr><td>Actualmente no hay entradas.</td><td></td></tr>	
+		if(administradores2 == null) { %>
+		<tr><td>Actualmente no hay usuarios.</td><td></td></tr>	
 	<%	} else {
-			for (Post p : posts2) {
-	%><tr><td><a href="post?edit=<%= p.getId()%>"><%= p.getTitulo()%></a></td><td><a href="post?del=<%= p.getId()%>">Eliminar</td></tr><%
+			for (Administradores a : administradores2) {
+	%><tr><td><a href="administradores?edit=<%= a.getId()%>"><%= a.getUsuario()%></a></td><td><a href="administradores?del=<%= a.getId()%>">Eliminar</td></tr><%
 		        }
 			}
 				%>

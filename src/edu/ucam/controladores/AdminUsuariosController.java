@@ -1,6 +1,7 @@
 package edu.ucam.controladores;
 
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -87,8 +88,8 @@ public class AdminUsuariosController extends AdminController {
 			Administradores administradores=service.getRegistroById(Administradores.class,Integer.parseInt(request.getParameter("edit")) );
 			administradores.setEmail(request.getParameter("email"));
 			administradores.setUsuario(request.getParameter("usuario"));
-			administradores.setPassword(request.getParameter("password"));
-			
+			administradores.setPassword(md5(request.getParameter("password")));
+			System.out.println(md5("123456"));
 			try {
 				service.update(Administradores.class, administradores);
 			}catch (Exception e) {
@@ -110,7 +111,7 @@ public class AdminUsuariosController extends AdminController {
 			Administradores administradores=new Administradores();
 			administradores.setEmail(request.getParameter("email"));
 			administradores.setUsuario(request.getParameter("usuario"));
-			administradores.setPassword(request.getParameter("password"));
+			administradores.setPassword(md5(request.getParameter("password")));
 			
 			try {
 				service.create(Administradores.class, administradores);
@@ -173,5 +174,30 @@ public class AdminUsuariosController extends AdminController {
 			request.getRequestDispatcher("/admin/error.jsp").forward(request, response);
 		}
 	}
+	
+    public String  md5(String password)throws Exception
+    {
+    	//String password = "123456";
+    	
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(password.getBytes());
+        
+        byte byteData[] = md.digest();
+ 
+        //convert the byte to hex format method 1
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        
+        //convert the byte to hex format method 2
+        StringBuffer hexString = new StringBuffer();
+    	for (int i=0;i<byteData.length;i++) {
+    		String hex=Integer.toHexString(0xff & byteData[i]);
+   	     	if(hex.length()==1) hexString.append('0');
+   	     	hexString.append(hex);
+    	}
+    	return hexString.toString();
+    }
 	
 }

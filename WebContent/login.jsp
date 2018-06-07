@@ -73,7 +73,7 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="password">Contrase&ntilde;a</label>
-			    <input type="password" class="form-control" id="password" name="password" value="123456" required="required"/>
+			    <input type="password" class="form-control" id="password" name="password" value="" required="required"/>
 			  </div>
 			
 			  <button type="submit" class="btn btn-primary">Entrar</button>

@@ -16,10 +16,10 @@ import edu.ucam.modelos.Post;
 
 
 @WebServlet(urlPatterns = { "/admin/indexAjax" })
-public class AdminIndexAjaxController extends AdminController {
+public class ____________AdminIndexAjaxController extends AdminController {
 	private static final long serialVersionUID = 963924354958882227L;
 	
-    public AdminIndexAjaxController() {
+    public ____________AdminIndexAjaxController() {
         super();
     }
 

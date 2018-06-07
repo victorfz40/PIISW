@@ -10,17 +10,16 @@
 	<div class="col-lg-8 mx-auto">		
 		<article class="post">
 		<h2>
-			Últimos comentarios
+			Panel de administración
 		</h2>
+		<hr />
 		<section class="comentarios">				
 			<table id="comentarios" class="display" width="100%"></table>
+			<p>En esta sección puede administrar el contenido del blog desde el menu situado a su izquierda.</p>
 		</section>
 		
 		<hr />
 
-		<h2>
-			Últimas entradas
-		</h2>
 		
 		<section class="entradas">			
 			<table id="entradas" class="display" width="100%"></table>
